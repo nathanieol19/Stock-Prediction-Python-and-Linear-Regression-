@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Apple Stock Analyzer</title>
+</head>
+<body>
+    <h1>Apple Stock Analyzer</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="number_of_years">Enter the number of years to analyze (will start with current year):</label>
+        <input type="number" name="number_of_years" required>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if plot %}
+        <img src="data:image/png;base64,{{ plot }}" alt="Apple Stock Opening Price">
+    {% endif %}
+
+    {% if predicted_close_price%}
+    <p>Predicted Closing Price for Future Date: ${{ predicted_close_price|floatformat:2 }}</p>
+
+    {% endif %}
+</body>
+</html>
