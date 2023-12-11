@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Head section of HTML, including the title of the webpage -->
     <title>Apple Stock Analyzer</title>
 </head>
 <body>
+    <!-- Body section of HTML -->
     <h1>Apple Stock Analyzer</h1>
+
+    <!-- Form for user input using the POST method -->
     <form method="POST">
         {% csrf_token %}
+        <!-- CSRF token for security (Cross-Site Request Forgery) -->
         <label for="number_of_years">Enter the number of years to analyze (will start with current year):</label>
+        <!-- Input field for the number of years with a required attribute -->
         <input type="number" name="number_of_years" required>
+        <!-- Button to submit the form -->
         <button type="submit">Analyze</button>
     </form>
 
+    <!-- Displaying the plot if available -->
     {% if plot %}
         <img src="data:image/png;base64,{{ plot }}" alt="Apple Stock Opening Price">
     {% endif %}
 
-    {% if predicted_close_price%}
-    <p>Predicted Closing Price for Future Date: ${{ predicted_close_price|floatformat:2 }}</p>
-
+    <!-- Displaying the predicted closing price if available -->
+    {% if predicted_close_price %}
+        <p>Predicted Closing Price for Future Date: ${{ predicted_close_price|floatformat:2 }}</p>
     {% endif %}
 </body>
 </html>
